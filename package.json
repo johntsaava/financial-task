@@ -2,7 +2,8 @@
   "name": "financial-task",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "format": "prettier --write \"**/*.js\"",
+    "lint": "eslint index.js"
   },
   "devDependencies": {
     "eslint": "^8.35.0",
