@@ -3,7 +3,7 @@
   "main": "index.js",
   "scripts": {
     "format": "prettier --write \"**/*.js\"",
-    "lint": "eslint index.js"
+    "lint": "eslint \"**/*.js\""
   },
   "devDependencies": {
     "eslint": "^8.35.0",
