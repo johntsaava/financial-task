@@ -1,9 +1,12 @@
 const feeCashInSchema = require("../schemas/feeCashInSchema");
 const feeCashOutNaturalSchema = require("../schemas/feeCashOutNaturalSchema");
 const feeCashOutLegalSchema = require("../schemas/feeCashOutLegalSchema");
+const urlSchema = require("../schemas/urlSchema");
 
 async function getFeeCashIn() {
-  const res = await fetch(process.env.API_URL_CASH_IN);
+  const input = urlSchema.parse(process.env.API_URL_CASH_IN);
+
+  const res = await fetch(input);
   const data = await res.json();
 
   const fee = feeCashInSchema.parse(data);
@@ -12,7 +15,9 @@ async function getFeeCashIn() {
 }
 
 async function getFeeCashOutNatural() {
-  const res = await fetch(process.env.API_URL_CASH_OUT_NATURAL);
+  const input = urlSchema.parse(process.env.API_URL_CASH_OUT_NATURAL);
+
+  const res = await fetch(input);
   const data = await res.json();
 
   const fee = feeCashOutNaturalSchema.parse(data);
@@ -21,7 +26,9 @@ async function getFeeCashOutNatural() {
 }
 
 async function getFeeCashOutLegal() {
-  const res = await fetch(process.env.API_URL_CASH_OUT_LEGAL);
+  const input = urlSchema.parse(process.env.API_URL_CASH_OUT_LEGAL);
+
+  const res = await fetch(input);
   const data = await res.json();
 
   const fee = feeCashOutLegalSchema.parse(data);
