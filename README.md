@@ -3,7 +3,7 @@
 To run the Node.js application, please follow these steps:
 
 1. Install Node.js and npm on your machine if you haven't already done so.
-2. Provide API urls in .env file.
+2. Create .env file from .env.example and fill it with API URLs.
 3. Open a terminal window and navigate to the root directory of the application.
 4. Run the following command to install the dependencies required by the application:
 
