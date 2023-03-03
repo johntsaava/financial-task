@@ -1,29 +1,29 @@
-const fs = require("fs");
+require("dotenv").config();
+const calcFee = require("./helpers/calcFee");
+const getFeesConfig = require("./helpers/getFeesConfig");
+const getInputData = require("./helpers/getInputData");
 
-// Check if a command-line argument is provided
-if (process.argv.length < 3) {
-  console.error("Usage: node app.js <input.json>");
-  process.exit(1);
+async function main() {
+  const [{ cashIn, cashOutNatural, cashOutJuridical }, inputData] =
+    await Promise.all([getFeesConfig(), getInputData()]);
+
+  inputData
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+    .forEach(({ date, user_id, user_type, type, operation: { amount } }) => {
+      const commission = calcFee(
+        type,
+        user_type,
+        amount,
+        date,
+        user_id,
+        inputData,
+        cashIn,
+        cashOutNatural,
+        cashOutJuridical
+      );
+
+      console.log(commission.toFixed(2));
+    });
 }
 
-// Get the filename from the command-line argument
-const filename = process.argv[2];
-
-// Read the contents of the JSON file
-fs.readFile(filename, "utf8", (readErr, data) => {
-  if (readErr) {
-    console.error(`Error reading file: ${readErr}`);
-    process.exit(1);
-  }
-
-  try {
-    // Parse the JSON data
-    const jsonData = JSON.parse(data);
-
-    // Log the contents to the console
-    console.log(jsonData);
-  } catch (parseErr) {
-    console.error(`Error parsing JSON data: ${parseErr}`);
-    process.exit(1);
-  }
-});
+main();
