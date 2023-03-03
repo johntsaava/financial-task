@@ -17,6 +17,12 @@ npm install
 npm start
 ```
 
+or
+
+```
+node index.js input.json
+```
+
 # Initiating System's Tests
 
 To run the tests for the Node.js application, please follow these steps:
